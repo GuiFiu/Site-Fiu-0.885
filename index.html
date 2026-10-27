@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FIU Capoeira — Entrada</title>
+<meta name="description" content="Acesso ao sistema de gestão da Família Irmãos Unidos — Capoeira. Presenças, cordas, mensalidades e mensagens em um só lugar."/>
+<meta name="theme-color" content="#07090a"/>
+<meta property="og:title" content="FIU Capoeira — Família Irmãos Unidos"/>
+<meta property="og:description" content="Sistema de gestão da academia: presenças, cordas, mensalidades e mensagens."/>
+<meta property="og:type" content="website"/>
+<link rel="icon" type="image/png" href="assets/logo.png"/>
+<link rel="apple-touch-icon" href="assets/logo.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Barlow+Condensed:wght@500;700;900&display=swap" rel="stylesheet"/>
+<script>try{var _t=localStorage.getItem('fiu_theme')||'dark';document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
+<style>
+:root{--g1:#079d28;--g2:#4ebe6a;--y1:#c89a00;--y2:#f9d441;--b1:#073e8e;--b2:#4a7acc;--r1:#b83530;--r2:#e06060;}
+[data-theme="dark"]{
+  --bg:#07090a;--bg2:#0c1210;--surf:#111916;--surf2:#192220;
+  --bord:#213028;--bord2:#2d4038;--txt:#eef4ef;--txt2:#b0c4b8;--mute:#6a8872;
+  --acc:#f9d441;--acc2:#4ebe6a;
+  --ok-bg:rgba(7,157,40,.12);--ok-bd:rgba(78,190,106,.3);--ok-tx:#4ebe6a;
+  --wn-bg:rgba(200,154,0,.12);--wn-bd:rgba(249,212,65,.28);--wn-tx:#f9d441;
+  --er-bg:rgba(184,53,48,.12);--er-bd:rgba(224,96,96,.28);--er-tx:#e06060;
+  --in-bg:rgba(7,62,142,.12);--in-bd:rgba(74,122,204,.28);--in-tx:#4a7acc;
+  --shad:rgba(0,0,0,.4);--shad2:rgba(0,0,0,.65);--scrl:#2d4038;
+}
+[data-theme="light"]{
+  --bg:#f2f5f2;--bg2:#e8ede8;--surf:#ffffff;--surf2:#edf3ed;
+  --bord:#ccd8cc;--bord2:#b0c8b4;--txt:#162018;--txt2:#3a5040;--mute:#6a8870;
+  --acc:#b08800;--acc2:#079d28;
+  --ok-bg:rgba(7,157,40,.08);--ok-bd:rgba(7,157,40,.22);--ok-tx:#079d28;
+  --wn-bg:rgba(200,154,0,.08);--wn-bd:rgba(200,154,0,.25);--wn-tx:#a07800;
+  --er-bg:rgba(184,53,48,.08);--er-bd:rgba(184,53,48,.22);--er-tx:#b83530;
+  --in-bg:rgba(7,62,142,.08);--in-bd:rgba(7,62,142,.2);--in-tx:#073e8e;
+  --shad:rgba(0,0,0,.08);--shad2:rgba(0,0,0,.14);--scrl:#b0c8b4;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;font-family:'Barlow',sans-serif;}
+body{background:var(--bg);color:var(--txt);transition:background .25s,color .25s;overflow:hidden;}
+
+/* ── LAYOUT DIVIDIDO ── */
+.screen{
+  display:flex;height:100vh;width:100vw;
+  animation:fadeIn .4s ease;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ── LADO ESQUERDO: brand ── */
+.left-panel{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:48px 44px;position:relative;overflow:hidden;
+  background:var(--bg);border-right:1px solid var(--bord);
+}
+.left-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 25%,rgba(7,157,40,.14) 0%,transparent 65%),
+    radial-gradient(ellipse 50% 40% at 10% 80%,rgba(7,62,142,.08) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 35% at 90% 70%,rgba(200,154,0,.06) 0%,transparent 50%);
+}
+/* Partículas decorativas */
+.left-bg::before{
+  content:'';position:absolute;width:300px;height:300px;border-radius:50%;
+  border:1px solid rgba(7,157,40,.1);top:10%;left:50%;transform:translateX(-50%);
+  animation:ring 8s linear infinite;
+}
+.left-bg::after{
+  content:'';position:absolute;width:500px;height:500px;border-radius:50%;
+  border:1px solid rgba(7,157,40,.06);top:5%;left:50%;transform:translateX(-50%);
+  animation:ring 12s linear infinite reverse;
+}
+@keyframes ring{from{transform:translateX(-50%) rotate(0)}to{transform:translateX(-50%) rotate(360deg)}}
+
+.logo-wrap{position:relative;z-index:1;margin-bottom:26px;}
+.logo-img{
+  width:130px;height:130px;border-radius:50%;object-fit:contain;
+  border:2px solid rgba(7,157,40,.45);
+  box-shadow:0 0 40px rgba(7,157,40,.25),0 0 80px rgba(7,157,40,.1);
+  animation:float 4.5s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+.brand-name{
+  font-family:'Cinzel',serif;font-size:1.6rem;font-weight:900;
+  color:var(--acc);text-align:center;letter-spacing:.04em;
+  position:relative;z-index:1;line-height:1.2;margin-bottom:6px;
+}
+.brand-sub{
+  font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--acc2);font-weight:600;position:relative;z-index:1;text-align:center;
+}
+.brand-divider{
+  width:60px;height:2px;margin:18px auto;
+  background:linear-gradient(90deg,transparent,var(--g1),transparent);
+  position:relative;z-index:1;
+}
+.brand-tagline{
+  font-size:.85rem;color:var(--mute);text-align:center;
+  max-width:220px;line-height:1.75;position:relative;z-index:1;
+  font-style:italic;
+}
+.cord-pips{
+  display:flex;gap:6px;margin-top:28px;flex-wrap:wrap;
+  justify-content:center;position:relative;z-index:1;
+}
+.pip{
+  width:14px;height:14px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.15);opacity:.75;
+  box-shadow:0 0 8px currentColor;
+  transition:transform .2s;cursor:default;
+}
+.pip:hover{transform:scale(1.3);opacity:1;}
+
+/* Theme toggle */
+.theme-toggle{
+  position:absolute;top:18px;right:18px;z-index:10;
+  width:36px;height:36px;border-radius:10px;
+  background:var(--surf2);border:1px solid var(--bord);
+  color:var(--txt2);cursor:pointer;font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.theme-toggle:hover{border-color:var(--acc);color:var(--acc);}
+
+/* Versão */
+.version-lbl{
+  position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
+  font-size:.62rem;color:var(--bord2);letter-spacing:.1em;text-transform:uppercase;
+  z-index:1;white-space:nowrap;
+}
+
+/* ── LADO DIREITO: formulário ── */
+.right-panel{
+  width:460px;flex-shrink:0;
+  background:var(--bg2);display:flex;flex-direction:column;
+  overflow-y:auto;
+}
+.right-panel::-webkit-scrollbar{width:4px;}
+.right-panel::-webkit-scrollbar-thumb{background:var(--scrl);border-radius:4px;}
+
+/* Tabs */
+.tab-bar{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--bord);flex-shrink:0;
+  position:sticky;top:0;z-index:10;background:var(--bg2);
+}
+.tab-btn{
+  padding:18px;text-align:center;
+  font-family:'Barlow Condensed',sans-serif;font-size:.9rem;
+  font-weight:900;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);background:transparent;border:none;cursor:pointer;
+  transition:all .22s;position:relative;
+}
+.tab-btn::after{
+  content:'';position:absolute;bottom:0;left:20%;right:20%;height:2px;
+  background:linear-gradient(90deg,var(--g1),var(--y2));
+  transform:scaleX(0);transition:transform .25s;border-radius:2px;
+}
+.tab-btn:hover{color:var(--txt2);}
+.tab-btn.active{color:var(--txt);}
+.tab-btn.active::after{transform:scaleX(1);}
+
+/* Form body */
+.form-body{padding:30px 32px 40px;flex:1;}
+.panel{display:none;}
+.panel.active{display:block;animation:slideIn .22s ease;}
+@keyframes slideIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
+
+.section-title{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:900;color:var(--txt);margin-bottom:3px;}
+.section-sub{font-size:.78rem;color:var(--mute);margin-bottom:20px;line-height:1.5;}
+
+/* Role selector */
+.roles{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:20px;}
+.role-card{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:9px 4px;border-radius:10px;cursor:pointer;
+  border:1.5px solid var(--bord);background:var(--surf);
+  transition:all .2s;user-select:none;
+}
+.role-card:hover{border-color:var(--bord2);background:var(--surf2);}
+.role-card.active{
+  border-color:var(--g1);
+  background:linear-gradient(160deg,rgba(7,157,40,.12),rgba(7,62,142,.08));
+  box-shadow:0 0 0 3px rgba(7,157,40,.12);
+}
+.role-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--txt2);}
+.role-icon svg{width:100%;height:100%;display:block;}
+.role-card.active .role-icon{color:var(--g2);}
+.role-label{font-size:.54rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);text-align:center;}
+.role-card.active .role-label{color:var(--g2);}
+.role-dot{width:7px;height:7px;border-radius:50%;opacity:.35;transition:opacity .2s;}
+.role-card.active .role-dot{opacity:1;}
+
+/* Inputs */
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);margin-bottom:5px;}
+.fg-row{display:grid;gap:10px;}
+.fg-2{grid-template-columns:1fr 1fr;}
+.fg-3{grid-template-columns:1fr 1fr 1fr;}
+.inp{
+  width:100%;padding:10px 13px;
+  background:var(--bg);border:1.5px solid var(--bord);border-radius:8px;
+  color:var(--txt);font-family:'Barlow',sans-serif;font-size:.88rem;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.inp:focus{border-color:var(--y2);box-shadow:0 0 0 3px rgba(249,212,65,.08);}
+.inp::placeholder{color:var(--mute);}
+.inp option{background:var(--surf);}
+.inp-icon{position:relative;}
+.inp-icon input{padding-left:36px;}
+.inp-icon .icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--mute);width:16px;height:16px;display:flex;align-items:center;justify-content:center;}
+.inp-icon .icon svg{width:100%;height:100%;display:block;}
+
+/* Password strength */
+.pass-strength{height:3px;border-radius:2px;margin-top:4px;background:var(--bord);overflow:hidden;}
+.pass-strength-fill{height:100%;border-radius:2px;transition:width .3s,background .3s;}
+
+/* Submit */
+.submit-btn{
+  width:100%;padding:13px;margin-top:10px;border-radius:9px;
+  background:linear-gradient(135deg,var(--g1),#0a7820);
+  border:1px solid var(--g2);color:#fff;
+  font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;
+  letter-spacing:.09em;cursor:pointer;transition:all .25s;
+  position:relative;overflow:hidden;
+}
+.submit-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);
+  opacity:0;transition:opacity .2s;
+}
+.submit-btn:hover::before{opacity:1;}
+.submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(7,157,40,.35);}
+.submit-btn:active{transform:translateY(0);}
+.submit-btn.loading{opacity:.7;cursor:not-allowed;}
+
+/* Error */
+.err-msg{font-size:.76rem;color:var(--er-tx);text-align:center;margin-top:9px;min-height:18px;font-weight:600;}
+
+/* Hint */
+.hint-box{
+  font-size:.7rem;color:var(--mute);margin-top:14px;
+  padding:10px 13px;background:var(--surf);border:1px solid var(--bord);
+  border-radius:8px;line-height:1.7;
+}
+.hint-box strong{color:var(--txt2);}
+.hint-box .hint-code{
+  display:inline-block;background:var(--surf2);border:1px solid var(--bord2);
+  border-radius:4px;padding:1px 6px;font-family:monospace;font-size:.72rem;
+  color:var(--y2);letter-spacing:.05em;
+}
+
+/* Switch link */
+.switch-link{text-align:center;margin-top:14px;font-size:.75rem;color:var(--mute);}
+.switch-link a{color:var(--g2);cursor:pointer;text-decoration:underline;font-weight:600;}
+
+/* Redirect card (shown after login) */
+.redirect-card{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 20px;text-align:center;animation:slideIn .3s ease;
+}
+.redirect-icon{width:56px;height:56px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;color:var(--acc);}
+.redirect-icon svg{width:100%;height:100%;display:block;}
+.redirect-title{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:var(--txt);margin-bottom:8px;}
+.redirect-sub{font-size:.82rem;color:var(--mute);line-height:1.6;margin-bottom:20px;}
+.redirect-btn{
+  padding:11px 28px;border-radius:8px;
+  background:linear-gradient(135deg,var(--g1),#0a7820);
+  border:1px solid var(--g2);color:#fff;
+  font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;
+  letter-spacing:.08em;cursor:pointer;transition:all .22s;
+  text-decoration:none;display:inline-block;
+}
+.redirect-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(7,157,40,.3);}
+
+/* Divisor "ou" */
+.or-divider{
+  display:flex;align-items:center;gap:12px;margin:18px 0;
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);
+}
+.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:var(--bord);}
+
+/* Corda badge preview */
+.corda-preview{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 13px;background:var(--surf);border:1px solid var(--bord);border-radius:8px;
+  margin-top:6px;
+}
+.corda-preview-circle{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  border:2px solid rgba(255,255,255,.15);
+  box-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+.corda-preview-info .cp-name{font-size:.82rem;font-weight:700;color:var(--txt);}
+.corda-preview-info .cp-sim{font-size:.68rem;color:var(--acc);font-style:italic;}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:22px;right:22px;z-index:600;
+  padding:11px 18px;border-radius:8px;font-size:.8rem;font-weight:600;color:#fff;
+  transform:translateY(50px);opacity:0;transition:all .3s;pointer-events:none;
+  background:var(--g1);border:1px solid var(--g2);box-shadow:0 4px 20px rgba(0,0,0,.3);
+}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.warn{background:var(--y1);border-color:var(--y2);}
+.toast.err{background:var(--r1);border-color:var(--r2);}
+
+@media(max-width:780px){
+  .screen{flex-direction:column;overflow-y:auto;height:auto;min-height:100vh;}
+  .left-panel{padding:28px 24px;border-right:none;border-bottom:1px solid var(--bord);}
+  .logo-img{width:80px;height:80px;}
+  .brand-name{font-size:1.2rem;}
+  .right-panel{width:100%;}
+  body{overflow:auto;}
+}
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ACABAMENTO — camada final de apresentação
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+::selection{background:rgba(249,212,65,.26);color:var(--txt);}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px;}
+
+/* Textura sutil no painel da marca */
+.left-panel::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:22px 22px;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 42%,#000 18%,transparent 72%);
+  mask-image:radial-gradient(ellipse at 50% 42%,#000 18%,transparent 72%);
+}
+
+/* Logo com anéis */
+.logo-wrap{display:flex;align-items:center;justify-content:center;}
+.logo-wrap::before{
+  content:'';position:absolute;inset:-13px;border-radius:50%;
+  border:1px solid rgba(249,212,65,.18);
+}
+.logo-wrap::after{
+  content:'';position:absolute;inset:-25px;border-radius:50%;
+  border:1px dashed rgba(7,157,40,.22);
+  animation:giro 30s linear infinite;
+}
+@keyframes giro{to{transform:rotate(360deg)}}
+.logo-img{
+  width:144px;height:144px;
+  box-shadow:0 0 0 5px var(--bg),0 18px 44px -16px rgba(0,0,0,.85),0 0 46px rgba(7,157,40,.22);
+}
+
+/* Marca */
+.brand-name{font-size:1.72rem;letter-spacing:.05em;}
+.brand-sub{font-size:.72rem;letter-spacing:.32em;}
+.brand-tagline{max-width:250px;font-size:.86rem;}
+.cord-pips{gap:7px;margin-top:30px;}
+
+/* Painel direito com profundidade */
+.right-panel{box-shadow:-22px 0 48px -34px rgba(0,0,0,.7);}
+.tab-btn{font-size:.92rem;}
+.form-body{padding:32px 34px 34px;}
+.section-title{font-size:1.16rem;}
+.section-sub{font-size:.8rem;}
+
+/* Controles */
+.inp{border-radius:9px;font-size:.9rem;}
+.inp-icon .icon{width:17px;height:17px;}
+.inp-icon.has-eye input{padding-right:42px;}
+.eye-btn{
+  position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  width:30px;height:30px;border-radius:7px;border:none;background:transparent;
+  color:var(--mute);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:color .18s,background .18s;
+}
+.eye-btn:hover{color:var(--txt);background:var(--surf2);}
+.eye-btn svg{width:16px;height:16px;display:block;}
+.role-card{border-radius:11px;padding:10px 4px;}
+.role-label{font-size:.56rem;letter-spacing:.07em;}
+.submit-btn{border-radius:10px;padding:14px;font-size:.95rem;}
+.submit-btn:focus-visible{outline-offset:3px;}
+
+/* Contas de demonstração */
+.demo-box{
+  margin-top:18px;padding:12px 13px;border-radius:11px;
+  border:1px dashed var(--bord2);
+  background:linear-gradient(180deg,var(--surf),transparent 85%);
+}
+.demo-label{
+  display:block;font-size:.6rem;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--mute);margin-bottom:9px;
+}
+.demo-chips{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.demo-chip{
+  display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;
+  border:1px solid var(--bord);background:var(--surf2);color:var(--txt2);
+  cursor:pointer;font-family:'Barlow',sans-serif;font-size:.72rem;font-weight:700;
+  text-align:left;transition:all .18s;line-height:1.15;
+}
+.demo-chip:hover{border-color:var(--acc);color:var(--txt);transform:translateY(-1px);}
+.demo-chip:active{transform:translateY(0);}
+.demo-chip .dc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.demo-chip em{
+  display:block;font-style:normal;font-size:.6rem;font-weight:600;
+  color:var(--mute);letter-spacing:.02em;margin-top:1px;
+}
+
+/* Rodapé */
+.login-foot{
+  display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
+  margin-top:22px;padding-top:14px;border-top:1px solid var(--bord);
+  font-size:.61rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);
+}
+.login-foot .lf-sep{width:3px;height:3px;border-radius:50%;background:var(--bord2);}
+.version-lbl{font-size:.6rem;letter-spacing:.12em;}
+
+/* Telas pequenas */
+@media(max-width:780px){
+  .logo-wrap::after{display:none;}
+  .logo-img{width:96px;height:96px;}
+  .brand-name{font-size:1.32rem;}
+  .brand-tagline{font-size:.8rem;}
+  .cord-pips{margin-top:20px;gap:5px;}
+  .pip{width:12px;height:12px;}
+  .form-body{padding:24px 20px 28px;}
+  .version-lbl{position:static;transform:none;margin-top:18px;text-align:center;}
+}
+@media(max-width:420px){
+  .demo-chips{grid-template-columns:1fr;}
+  .roles{gap:4px;}
+  .role-label{font-size:.52rem;}
+}
+/* Notebooks baixos / celular na horizontal */
+@media(max-height:640px) and (min-width:781px){
+  .left-panel{padding:26px 30px;}
+  .logo-img{width:104px;height:104px;}
+  .brand-tagline,.cord-pips{display:none;}
+  .brand-divider{margin:12px auto;}
+  .brand-name{font-size:1.4rem;}
+}
+@media(prefers-reduced-motion:reduce){@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
+}
+</style>
+</head>
+<body>
+
+<div class="screen" id="screen">
+
+  <!-- ── ESQUERDA: identidade visual ── -->
+  <div class="left-panel">
+    <div class="left-bg"></div>
+    <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">🌙</button>
+
+    <div class="logo-wrap">
+      <img class="logo-img" src="assets/logo.png" alt="FIU Capoeira"/>
+    </div>
+    <div class="brand-name">Família<br>Irmãos Unidos</div>
+    <div class="brand-sub">Capoeira</div>
+    <div class="brand-divider"></div>
+    <div class="brand-tagline">"A arte, a luta, a família.<br>Bem-vindo(a) à nossa roda."</div>
+    <div class="cord-pips" id="cord-pips"></div>
+    <div class="version-lbl">Sistema FIU · v1.0</div>
+  </div>
+
+  <!-- ── DIREITA: login / cadastro ── -->
+  <div class="right-panel">
+    <div class="tab-bar">
+      <button class="tab-btn active" id="tbtn-login" onclick="switchTab('login')">Entrar</button>
+      <button class="tab-btn"        id="tbtn-reg"   onclick="switchTab('reg')">Cadastrar</button>
+    </div>
+
+    <div class="form-body">
+
+      <!-- ═════ LOGIN ═════ -->
+      <div class="panel active" id="panel-login">
+        <div class="section-title">Bem-vindo(a) de volta</div>
+        <div class="section-sub">Selecione seu perfil e faça login para acessar o sistema</div>
+
+        <!-- Seletor de perfil -->
+        <div class="roles" id="login-roles">
+          <div class="role-card active" onclick="setRole('login','aluno',this)">
+            <div class="role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></div>
+            <div class="role-dot" style="background:#079d28"></div>
+            <div class="role-label">Aluno</div>
+          </div>
+          <div class="role-card" onclick="setRole('login','professor',this)">
+            <div class="role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5"/><path d="M22 10v6"/></svg></div>
+            <div class="role-dot" style="background:#073e8e"></div>
+            <div class="role-label">Professor</div>
+          </div>
+          <div class="role-card" onclick="setRole('login','contramestre',this)">
+            <div class="role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3Z"/></svg></div>
+            <div class="role-dot" style="background:#d4704a"></div>
+            <div class="role-label">Contra Mestre</div>
+          </div>
+          <div class="role-card" onclick="setRole('login','mestre',this)">
+            <div class="role-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9-6.3 3.9 1.7-7L2 9.2l7.1-.6L12 2Z"/></svg></div>
+            <div class="role-dot" style="background:#886e12"></div>
+            <div class="role-label">Mestre</div>
+          </div>
+        </div>
+
+        <div class="fg">
+          <label>Usuário</label>
+          <div class="inp-icon">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></span>
+            <input id="l-user" class="inp" type="text" placeholder="Seu nome de usuário"
+              autocomplete="username" onkeydown="if(event.key==='Enter')document.getElementById('l-pass').focus()"/>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Senha</label>
+          <div class="inp-icon has-eye">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+            <input id="l-pass" class="inp" type="password" placeholder="••••••••"
+              autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+            <button class="eye-btn" type="button" onclick="togglePass('l-pass',this)" aria-label="Mostrar senha" title="Mostrar senha">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button class="submit-btn" id="btn-login" onclick="doLogin()">Entrar no Sistema</button>
+        <div class="err-msg" id="l-err"></div>
+
+        <div class="demo-box">
+          <span class="demo-label">Acesso rápido · contas de demonstração</span>
+          <div class="demo-chips">
+            <button type="button" class="demo-chip" onclick="preencherDemo('aluno')">
+              <span class="dc-dot" style="background:#079d28"></span>
+              <span>Aluno<em>aluno · aluno123</em></span>
+            </button>
+            <button type="button" class="demo-chip" onclick="preencherDemo('professor')">
+              <span class="dc-dot" style="background:#073e8e"></span>
+              <span>Professor<em>professor · prof123</em></span>
+            </button>
+            <button type="button" class="demo-chip" onclick="preencherDemo('contramestre')">
+              <span class="dc-dot" style="background:#d4704a"></span>
+              <span>Contra Mestre<em>contramestre · contramestre123</em></span>
+            </button>
+            <button type="button" class="demo-chip" onclick="preencherDemo('mestre')">
+              <span class="dc-dot" style="background:#886e12"></span>
+              <span>Mestre<em>mestre · mestre123</em></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="switch-link">Não tem conta? <a onclick="switchTab('reg')">Cadastrar agora</a></div>
+      </div>
+
+      <!-- ═════ CADASTRO ═════ -->
+      <div class="panel" id="panel-reg">
+        <div class="section-title">Criar sua conta</div>
+        <div class="section-sub">Preencha os dados abaixo — alunos são adicionados automaticamente à turma</div>
+
+        <!-- Seletor de perfil -->
+        <div class="roles" id="reg-roles">
+          <div class="role-card active" onclick="setRole('reg','aluno',this)">
+            <div class="role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></div>
+            <div class="role-dot" style="background:#079d28"></div>
+            <div class="role-label">Aluno</div>
+          </div>
+          <div class="role-card" onclick="setRole('reg','professor',this)">
+            <div class="role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5"/><path d="M22 10v6"/></svg></div>
+            <div class="role-dot" style="background:#073e8e"></div>
+            <div class="role-label">Professor</div>
+          </div>
+          <div class="role-card" onclick="setRole('reg','contramestre',this)">
+            <div class="role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3Z"/></svg></div>
+            <div class="role-dot" style="background:#d4704a"></div>
+            <div class="role-label">Contra Mestre</div>
+          </div>
+          <div class="role-card" onclick="setRole('reg','mestre',this)">
+            <div class="role-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9-6.3 3.9 1.7-7L2 9.2l7.1-.6L12 2Z"/></svg></div>
+            <div class="role-dot" style="background:#886e12"></div>
+            <div class="role-label">Mestre</div>
+          </div>
+        </div>
+
+        <!-- Dados pessoais -->
+        <div class="fg-row fg-2">
+          <div class="fg"><label>Nome completo</label><input id="r-nome" class="inp" placeholder="Seu nome"/></div>
+          <div class="fg"><label>Usuário</label><input id="r-user" class="inp" placeholder="nome_usuario" autocomplete="username"/></div>
+        </div>
+        <div class="fg-row fg-2">
+          <div class="fg">
+            <label>Senha</label>
+            <div style="position:relative">
+              <input id="r-pass" class="inp" type="password" placeholder="Mínimo 4 caracteres"
+                autocomplete="new-password" oninput="checkStrength(this.value)" style="padding-right:42px"/>
+              <button class="eye-btn" type="button" onclick="togglePass('r-pass',this)" aria-label="Mostrar senha" title="Mostrar senha">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <div class="pass-strength"><div class="pass-strength-fill" id="pass-fill" style="width:0%;background:var(--er-tx)"></div></div>
+          </div>
+          <div class="fg"><label>Confirmar senha</label><input id="r-pass2" class="inp" type="password" placeholder="Repita a senha" autocomplete="new-password" onkeydown="if(event.key==='Enter')doRegister()"/></div>
+        </div>
+
+        <!-- Campos de aluno (corda + plano) -->
+        <div id="aluno-fields">
+          <div class="fg-row fg-2">
+            <div class="fg">
+              <label>Corda inicial</label>
+              <select id="r-corda" class="inp" onchange="updateCordaPreview()"></select>
+            </div>
+            <div class="fg">
+              <label>Plano</label>
+              <select id="r-plano" class="inp">
+                <option value="basico">Básico</option>
+                <option value="intermediario">Intermediário</option>
+                <option value="completo">Completo</option>
+              </select>
+            </div>
+          </div>
+          <!-- Preview da corda selecionada -->
+          <div class="corda-preview" id="corda-preview">
+            <div class="corda-preview-circle" id="cp-circle"></div>
+            <div class="corda-preview-info">
+              <div class="cp-name" id="cp-name">Corda Crua</div>
+              <div class="cp-sim" id="cp-sim">"Universo"</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Código de acesso (professor/mestre) -->
+        <div class="fg" id="code-field" style="display:none">
+          <label>Código de acesso</label>
+          <div class="inp-icon">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg></span>
+            <input id="r-code" class="inp" placeholder="Solicite o código com o Mestre"/>
+          </div>
+          <div style="font-size:.66rem;color:var(--mute);margin-top:4px">O código é fornecido pelo responsável do grupo.</div>
+        </div>
+
+        <button class="submit-btn" id="btn-reg" onclick="doRegister()">Criar Conta</button>
+        <div class="err-msg" id="r-err"></div>
+
+        <div class="switch-link">Já tem conta? <a onclick="switchTab('login')">Fazer login</a></div>
+      </div>
+
+      <footer class="login-foot">
+        <span>FIU Capoeira</span><span class="lf-sep"></span>
+        <span>Família Irmãos Unidos</span><span class="lf-sep"></span>
+        <span>Mestre Sidney</span>
+      </footer>
+
+    </div><!-- /form-body -->
+  </div><!-- /right-panel -->
+</div><!-- /screen -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── DADOS DE CORDAS ──
+const CORDAS=[
+  // Cores EXATAS das fotos do documento (Mestre Sidney / Família Irmãos Unidos)
+  {id:0, n:1, nome:'Crua',              c1:'#c8b878',c2:'#b0a060',sim:'Universo',          desc:'A corda de todo iniciante e o ingresso para o mundo da Capoeira.',                                                                           min:6, max:12, nivel:'iniciante'},
+  {id:1, n:2, nome:'Crua e Verde',      c1:'#c8b878',c2:'#1a9a30',sim:'Transição',         desc:'Corda de transição — a junção do universo com o oxigênio. Seu significado é a junção das duas cores que a compõem.',                         min:6, max:12, nivel:'iniciante'},
+  {id:2, n:3, nome:'Verde',             c1:'#1a9a30',c2:'#157825',sim:'Oxigênio',          desc:'Quando o aluno passa a ganhar mais resistência durante os treinos. Transmite harmonia e equilíbrio.',                                        min:6, max:12, nivel:'iniciante'},
+  {id:3, n:4, nome:'Verde e Laranja',   c1:'#1a9a30',c2:'#d06010',sim:'Transição',         desc:'Corda de transição entre o oxigênio e o despertar do sol.',                                                                                  min:6, max:12, nivel:'basico'},
+  {id:4, n:5, nome:'Laranja',           c1:'#d06010',c2:'#b85010',sim:'Despertar do Sol',  desc:'Quando o aluno desperta seus sentimentos pela Capoeira, seus reflexos e sua vontade. Transmite agilidade mental e corporal, encorajamento e dedicação.', min:8,max:14,nivel:'basico'},
+  {id:5, n:6, nome:'Laranja e Amarelo', c1:'#d06010',c2:'#e8c010',sim:'Transição',         desc:'Corda de transição entre o despertar do sol e o ouro.',                                                                                      min:8, max:14, nivel:'basico'},
+  {id:6, n:7, nome:'Amarelo',           c1:'#e8c010',c2:'#c8a808',sim:'Ouro',              desc:'Quando o aluno começa a valorizar seu aprendizado, a se valorizar como capoeirista e a valorizar seu mestre e seu grupo. Transmite energia e muita atenção.', min:10,max:16,nivel:'intermediario'},
+  {id:7, n:8, nome:'Amarelo e Azul',    c1:'#e8c010',c2:'#1040a0',sim:'Monitor/a',         desc:'Corda de Monitor/a — transição entre o ouro e a imensidão do mar.',                                                                          min:12, max:18, nivel:'intermediario'},
+  {id:8, n:9, nome:'Azul',             c1:'#1a50c0',c2:'#0c3890',sim:'Imensidão do Mar',   desc:'O aluno olha para trás e vê o caminho percorrido; para frente vê o tanto que tem que percorrer. Transmite tranquilidade, sinceridade e confiança. (Instrutor/a)', min:24,max:36,nivel:'instrutor'},
+  {id:9, n:10,nome:'Azul e Roxa',       c1:'#1a50c0',c2:'#7030a0',sim:'Instrutor/a 2º Grau',desc:'Instrutor/a de segundo grau — domínio profundo da arte.',                                                                                  min:24, max:36, nivel:'instrutor'},
+  {id:10,n:11,nome:'Roxa',              c1:'#7030a0',c2:'#5a2080',sim:'Pedras Preciosas',   desc:'O capoeirista é uma pedra lapidada de muito valor. Professor/a que acompanha o grupo de 10 a 13 anos. Transmite respeito, dignidade, devoção e sinceridade.', min:24,max:36,nivel:'professor'},
+  {id:11,n:12,nome:'Roxa e Marrom',     c1:'#7030a0',c2:'#7a3818',sim:'Professor/a 2º Grau',desc:'Professor/a de segundo grau.',                                                                                                              min:24, max:36, nivel:'professor'},
+  {id:12,n:13,nome:'Marrom',            c1:'#8a4018',c2:'#6a2e10',sim:'Terra',              desc:'O capoeirista começa a plantar suas primeiras raízes. Transmite respeito, maturidade, consciência e responsabilidade. (Contra Mestre/a)',    min:24, max:48, nivel:'contramestre'},
+  {id:13,n:14,nome:'Marrom e Preto',    c1:'#8a4018',c2:'#1a1a1a',sim:'Contra Mestre 2º',  desc:'Contra Mestre de segundo grau.',                                                                                                             min:24, max:48, nivel:'contramestre'},
+  {id:14,n:15,nome:'Preta',             c1:'#2a2a2a',c2:'#101010',sim:'Minérios e Negros Criadores', desc:'Simboliza os criadores da Capoeira. O mestre passou por muitas dificuldades e experiências. Transmite respeito, autoridade e maturidade. (Mestre/a)', min:36,max:60,nivel:'mestre'},
+  {id:15,n:16,nome:'Preta e Branca',    c1:'#2a2a2a',c2:'#e8e4d8',sim:'Mestre de 2º Grau', desc:'Mestre de segundo grau — a junção da escuridão com a luz.',                                                                                 min:36, max:60, nivel:'mestre'},
+  {id:16,n:17,nome:'Branca',            c1:'#e8e4d8',c2:'#d0ccbc',sim:'Luz',               desc:'A última etapa — transformação de todos os caminhos no universo da Capoeira. A mistura de todas as cores. Grão Mestre da Capoeira.',          min:48,max:999,nivel:'grandmestre'},
+];
+const NIVEL_COR={
+  iniciante:{bg:'rgba(7,157,40,.12)',bd:'rgba(7,157,40,.3)',tx:'#4ebe6a'},
+  basico:{bg:'rgba(184,96,16,.13)',bd:'rgba(208,96,0,.3)',tx:'#e08040'},
+  intermediario:{bg:'rgba(249,212,65,.12)',bd:'rgba(249,212,65,.28)',tx:'#f9d441'},
+  avancado:{bg:'rgba(7,62,142,.13)',bd:'rgba(7,62,142,.28)',tx:'#4a7acc'},
+  instrutor:{bg:'rgba(16,140,140,.12)',bd:'rgba(16,140,140,.28)',tx:'#40b8b8'},
+  professor:{bg:'rgba(122,56,184,.1)',bd:'rgba(122,56,184,.24)',tx:'#a878d0'},
+  contramestre:{bg:'rgba(184,76,48,.13)',bd:'rgba(184,76,48,.3)',tx:'#d4704a'},
+  mestre:{bg:'rgba(122,56,184,.13)',bd:'rgba(122,56,184,.28)',tx:'#9060d0'},
+  grandmestre:{bg:'rgba(238,244,239,.1)',bd:'rgba(238,244,239,.2)',tx:'#f0f0e4'},
+};
+
+// ── CONSTANTS ──
+const RC = {professor:'PROF2024', contramestre:'CONTRAMESTRE2024', mestre:'MESTRE2024'};
+const RM = {
+  aluno:    {l:'Aluno',    i:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>', d:'#079d28'},
+  professor:{l:'Professor',i:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5"/><path d="M22 10v6"/></svg>',d:'#073e8e'},
+  contramestre:{l:'Contra Mestre',i:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3Z"/></svg>',d:'#d4704a'},
+  mestre:   {l:'Mestre',  i:'<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9-6.3 3.9 1.7-7L2 9.2l7.1-.6L12 2Z"/></svg>', d:'#886e12'},
+};
+
+// ── STATE ──
+const loginRoles = {login:'aluno', reg:'aluno'};
+
+// ── THEME ──
+function toggleTheme(){
+  const d = document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme', d?'light':'dark');
+  document.getElementById('theme-btn').textContent = d?'🌙':'☀️';
+  localStorage.setItem('fiu_theme', d?'light':'dark');
+}
+(()=>{
+  const t = localStorage.getItem('fiu_theme')||'dark';
+  document.documentElement.setAttribute('data-theme', t);
+  const b = document.getElementById('theme-btn');
+  if(b) b.textContent = t==='dark'?'🌙':'☀️';
+})();
+
+// ── CORD PIPS ──
+(()=>{
+  const el = document.getElementById('cord-pips');
+  if(!el) return;
+  const cols = ['#c8b878','#1a9a30','#d06010','#e8c010','#1a50c0','#7030a0','#8a4018','#2a2a2a','#e8e4d8'];
+  el.innerHTML = cols.map(c=>`<div class="pip" style="background:${c};color:${c}" title="${c}"></div>`).join('');
+})();
+
+// ── CORDA SELECT ──
+function populateCordas(){
+  const sel = document.getElementById('r-corda');
+  if(!sel) return;
+  sel.innerHTML = CORDAS.map((c,i)=>`<option value="${i}">${c.n}. ${c.nome}</option>`).join('');
+  updateCordaPreview();
+}
+
+function updateCordaPreview(){
+  const idx = parseInt(document.getElementById('r-corda').value)||0;
+  const c = CORDAS[idx];
+  if(!c) return;
+  const grad = c.c2&&c.c1!==c.c2
+    ? `linear-gradient(135deg,${c.c1} 50%,${c.c2} 50%)`
+    : `linear-gradient(135deg,${c.c1},${c.c2||c.c1})`;
+  document.getElementById('cp-circle').style.background = grad;
+  document.getElementById('cp-name').textContent = c.nome;
+  document.getElementById('cp-sim').textContent = `"${c.sim}"`;
+}
+
+// ── TAB SWITCH ──
+function switchTab(tab){
+  ['login','reg'].forEach(t=>{
+    document.getElementById('tbtn-'+t).classList.toggle('active', t===tab);
+    document.getElementById('panel-'+t).classList.toggle('active', t===tab);
+  });
+  document.getElementById(tab==='login'?'l-err':'r-err').textContent='';
+}
+
+// ── ROLE SELECTOR ──
+function setRole(panel, role, el){
+  loginRoles[panel] = role;
+  el.closest('.roles').querySelectorAll('.role-card').forEach(r=>r.classList.remove('active'));
+  el.classList.add('active');
+  if(panel==='reg'){
+    const isAluno = role==='aluno';
+    document.getElementById('aluno-fields').style.display = isAluno?'':'none';
+    document.getElementById('code-field').style.display = isAluno?'none':'block';
+  }
+}
+
+// ── HELPERS DE APRESENTAÇÃO ──
+function togglePass(id, btn){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const mostrar = el.type === 'password';
+  el.type = mostrar ? 'text' : 'password';
+  btn.title = mostrar ? 'Ocultar senha' : 'Mostrar senha';
+  btn.setAttribute('aria-label', btn.title);
+  el.focus();
+}
+function preencherDemo(role){
+  const CONTAS = {
+    aluno:       ['aluno','aluno123'],
+    professor:   ['professor','prof123'],
+    contramestre:['contramestre','contramestre123'],
+    mestre:      ['mestre','mestre123']
+  };
+  const conta = CONTAS[role];
+  if(!conta) return;
+  const card = Array.from(document.querySelectorAll('#login-roles .role-card'))
+    .find(c => (c.getAttribute('onclick')||'').includes("'" + role + "'"));
+  if(card) setRole('login', role, card);
+  const u = document.getElementById('l-user');
+  const p = document.getElementById('l-pass');
+  if(u) u.value = conta[0];
+  if(p) p.value = conta[1];
+  const err = document.getElementById('l-err');
+  if(err) err.textContent = '';
+  const btn = document.getElementById('btn-login');
+  if(btn) btn.focus();
+}
+
+// ── PASSWORD STRENGTH ──
+function checkStrength(val){
+  const fill = document.getElementById('pass-fill');
+  if(!fill) return;
+  const len = val.length;
+  let w=0, col='var(--er-tx)';
+  if(len>=4)  { w=33; col='var(--er-tx)'; }
+  if(len>=7)  { w=66; col='var(--wn-tx)'; }
+  if(len>=10 && /[A-Z]/.test(val) && /[0-9]/.test(val)) { w=100; col='var(--ok-tx)'; }
+  fill.style.width=w+'%'; fill.style.background=col;
+}
+
+// ── TOAST ──
+function toast(msg, tipo=''){
+  const t = document.getElementById('toast');
+  t.textContent=msg; t.className='toast show'+(tipo?' '+tipo:'');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.className='toast',3000);
+}
+
+// ── STORAGE ──
+const loadUsers = ()=>{ try{return JSON.parse(localStorage.getItem('fiu_users')||'[]');}catch(e){return[];} };
+const saveUsers = u => localStorage.setItem('fiu_users', JSON.stringify(u));
+const loadS     = ()=>{ try{const s=localStorage.getItem('fiu4');if(s)return JSON.parse(s);}catch(e){} return{alunos:[],presencas:{},grade:[],pagamentos:[],tags:{},videos:{},config:{basico:89,intermediario:149,completo:219,tolerancia:5}}; };
+const saveS     = S => localStorage.setItem('fiu4', JSON.stringify(S));
+const saveSess  = u => sessionStorage.setItem('fiu_session', JSON.stringify(u));
+
+const DEFAULTS = [
+  {username:'mestre',    nome:'Mestre Sidney',  role:'mestre',    pass:'mestre123'},
+  {username:'contramestre', nome:'Contra Mestre Demo', role:'contramestre', pass:'contramestre123'},
+  {username:'professor', nome:'Professor Demo', role:'professor', pass:'prof123'},
+  {username:'aluno',     nome:'Aluno Demo',     role:'aluno',     pass:'aluno123'},
+];
+
+// dateToStr: formata usando componentes LOCAIS (evita bug de toISOString/UTC
+// que pode "pular" o dia perto da meia-noite em fusos como o do Brasil, UTC-3).
+function dateToStr(d){const y=d.getFullYear();const m=String(d.getMonth()+1).padStart(2,'0');const day=String(d.getDate()).padStart(2,'0');return`${y}-${m}-${day}`;}
+function today(){ return dateToStr(new Date()); }
+
+// ── LOGIN ──
+function doLogin(){
+  const un  = (document.getElementById('l-user').value||'').trim().toLowerCase();
+  const pw  = (document.getElementById('l-pass').value||'');
+  const err = document.getElementById('l-err');
+  const role = loginRoles.login;
+  err.textContent='';
+
+  if(!un||!pw){ err.textContent='Preencha todos os campos.'; return; }
+
+  const all  = [...DEFAULTS, ...loadUsers()];
+  const user = all.find(u=>u.username===un&&u.pass===pw);
+  if(!user){ err.textContent='Usuário ou senha incorretos.'; return; }
+  if(user.role!==role){ err.textContent=`Esta conta é ${RM[user.role].l}. Selecione o perfil correto.`; return; }
+
+  // Salva sessão
+  saveSess({username:user.username, nome:user.nome, role:user.role});
+
+  // Mostra card de redirecionamento
+  showRedirect(user.nome, user.role);
+}
+
+// ── CADASTRO ──
+function doRegister(){
+  const nome  = (document.getElementById('r-nome').value||'').trim();
+  const user  = (document.getElementById('r-user').value||'').trim().toLowerCase();
+  const pass  = (document.getElementById('r-pass').value||'');
+  const pass2 = (document.getElementById('r-pass2').value||'');
+  const role  = loginRoles.reg;
+  const code  = (document.getElementById('r-code').value||'').trim().toUpperCase();
+  const err   = document.getElementById('r-err');
+  err.textContent='';
+
+  if(!nome||!user||!pass){ err.textContent='Preencha todos os campos obrigatórios.'; return; }
+  if(pass.length<4){ err.textContent='Senha mínima de 4 caracteres.'; return; }
+  if(pass!==pass2){ err.textContent='As senhas não coincidem.'; return; }
+  if(!/^[a-z0-9_]{3,20}$/.test(user)){ err.textContent='Usuário: 3–20 letras minúsculas, números ou _'; return; }
+  if(role!=='aluno'&&code!==RC[role]){ err.textContent='Código de acesso inválido para '+RM[role].l+'.'; return; }
+
+  const all = [...DEFAULTS,...loadUsers()];
+  if(all.some(u=>u.username===user)){ err.textContent='Este nome de usuário já está em uso.'; return; }
+
+  // Salvar conta
+  const users = loadUsers();
+  users.push({username:user, nome, role, pass, createdAt:new Date().toISOString()});
+  saveUsers(users);
+
+  // Se for aluno: criar registro na turma do FIU Final
+  if(role==='aluno'){
+    const S = loadS();
+    const cidx = parseInt(document.getElementById('r-corda').value)||0;
+    const plano = document.getElementById('r-plano').value||'basico';
+    S.alunos.push({
+      id:Date.now(), nome, inicio:today(),
+      cordaIdx:cidx, historicoCordas:[{cordaIdx:cidx, data:today()}],
+      plano, vencimento:10, username:user
+    });
+    saveS(S);
+  }
+
+  // Salva sessão e redireciona
+  saveSess({username:user, nome, role});
+  toast('Conta criada com sucesso! 🎉');
+  setTimeout(()=> showRedirect(nome, role), 600);
+}
+
+// ── REDIRECT ──
+function showRedirect(nome, role){
+  const meta = RM[role];
+  const fb = document.querySelector('.form-body');
+  fb.innerHTML = `<div class="redirect-card">
+    <div class="redirect-icon">${meta.i}</div>
+    <div class="redirect-title">Bem-vindo(a), ${nome}!</div>
+    <div class="redirect-sub">
+      Login realizado com sucesso como <strong>${meta.l}</strong>.<br>
+      Você será redirecionado(a) ao sistema principal.
+    </div>
+    <a class="redirect-btn" href="painel.html">Acessar o Sistema →</a>
+    <div style="margin-top:14px;font-size:.7rem;color:var(--mute)">
+      Se não redirecionar automaticamente, clique no botão acima.
+    </div>
+  </div>`;
+  // Auto redirect after 2s
+  setTimeout(()=>{ window.location.href='painel.html'; }, 2200);
+}
+
+// ── BOOT ──
+populateCordas();
+
+// Se já tem sessão ativa, redirecionar
+(()=>{
+  try{
+    const sess = JSON.parse(sessionStorage.getItem('fiu_session')||'null');
+    if(sess&&sess.username){
+      showRedirect(sess.nome, sess.role);
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
